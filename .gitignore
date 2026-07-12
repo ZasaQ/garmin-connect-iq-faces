@@ -1,0 +1,5 @@
+bin/
+bin/*.prg
+bin/*.iq
+*.png.cache
+.vscode/settings.json

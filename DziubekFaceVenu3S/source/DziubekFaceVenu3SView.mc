@@ -32,15 +32,13 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
     function onUpdate(dc as Dc) as Void {
         View.onUpdate(dc);
 
-        var fgColor = Application.Properties.getValue("ForegroundColor") as Number;
         var width = dc.getWidth();
         var height = dc.getHeight();
         var centerX = width / 2;
         var centerY = height / 2;
 
-        dc.setColor(fgColor, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
 
-        // --- GODZINA (góra) ---
         var timeFormat = "$1$:$2$";
         var clockTime = System.getClockTime();
         var hours = clockTime.hour;
@@ -63,35 +61,33 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
         var stepsText = steps.toString();
         var stepsX = width * 0.05; 
         
-        dc.drawText(stepsX, centerY, Graphics.FONT_SMALL, stepsText,
+        dc.drawText(stepsX, centerY, Graphics.FONT_MEDIUM, stepsText,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             
-        var stepsTextWidth = dc.getTextWidthInPixels(stepsText, Graphics.FONT_SMALL);
+        var stepsTextWidth = dc.getTextWidthInPixels(stepsText, Graphics.FONT_MEDIUM);
         var iconStepsX = stepsX + (stepsTextWidth / 2) + 5; 
         var iconStepsY = centerY - 15;
         
         dc.drawBitmap(iconStepsX, iconStepsY, stepsIcon);
 
-
         var hr = getHeartRate();
         var hrText = (hr == null) ? "--" : hr.toString();
         var hrX = width * 0.85; 
         
-        dc.drawText(hrX, centerY, Graphics.FONT_SMALL, hrText,
+        dc.drawText(hrX, centerY, Graphics.FONT_MEDIUM, hrText,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             
-        var hrTextWidth = dc.getTextWidthInPixels(hrText, Graphics.FONT_SMALL);
+        var hrTextWidth = dc.getTextWidthInPixels(hrText, Graphics.FONT_MEDIUM);
         var iconHrX = hrX + (hrTextWidth / 2) + 5;
         var iconHrY = centerY - 15; 
         
         dc.drawBitmap(iconHrX, iconHrY, heartIcon);
 
-
         var now = Gregorian.info(Time.now(), Time.FORMAT_SHORT); 
         var dayName = DAY_NAMES[now.day_of_week - 1];
         var dateString = Lang.format("$1$, $2$.$3$", [dayName, now.day, now.month]);
 
-        dc.drawText(centerX, height * 0.90, Graphics.FONT_XTINY, dateString,
+        dc.drawText(centerX, height * 0.90, Graphics.FONT_TINY, dateString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 

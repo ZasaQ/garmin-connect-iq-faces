@@ -12,11 +12,13 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
 
     const DAY_NAMES = ["Nd", "Pon", "Wt", "Śr", "Czw", "Pt", "Sob"]; 
     
+    var faceFont;
     var stepsIcon;
     var heartIcon;
 
     function initialize() {
         WatchFace.initialize();
+        faceFont = Rez.Fonts.Pacifico_Regular;
     }
 
     function onLayout(dc as Dc) as Void {
@@ -55,7 +57,7 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
         }
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
-        dc.drawText(centerX, height * 0.15, Graphics.FONT_NUMBER_MEDIUM, timeString,
+        dc.drawText(centerX, height * 0.15, faceFont, timeString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         var steps = ActivityMonitor.getInfo().steps;
@@ -63,10 +65,10 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
         var stepsText = steps.toString();
         var stepsX = width * 0.05; 
         
-        dc.drawText(stepsX, centerY, Graphics.FONT_SMALL, stepsText,
+        dc.drawText(stepsX, centerY, faceFont, stepsText,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             
-        var stepsTextWidth = dc.getTextWidthInPixels(stepsText, Graphics.FONT_SMALL);
+        var stepsTextWidth = dc.getTextWidthInPixels(stepsText, faceFont);
         var iconStepsX = stepsX + (stepsTextWidth / 2) + 5; 
         var iconStepsY = centerY - 15;
         
@@ -77,10 +79,10 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
         var hrText = (hr == null) ? "--" : hr.toString();
         var hrX = width * 0.85; 
         
-        dc.drawText(hrX, centerY, Graphics.FONT_SMALL, hrText,
+        dc.drawText(hrX, centerY, faceFont, hrText,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             
-        var hrTextWidth = dc.getTextWidthInPixels(hrText, Graphics.FONT_SMALL);
+        var hrTextWidth = dc.getTextWidthInPixels(hrText, faceFont);
         var iconHrX = hrX + (hrTextWidth / 2) + 5;
         var iconHrY = centerY - 15; 
         
@@ -91,7 +93,7 @@ class DziubekFaceVenu3SView extends WatchUi.WatchFace {
         var dayName = DAY_NAMES[now.day_of_week - 1];
         var dateString = Lang.format("$1$, $2$.$3$", [dayName, now.day, now.month]);
 
-        dc.drawText(centerX, height * 0.90, Graphics.FONT_XTINY, dateString,
+        dc.drawText(centerX, height * 0.90, faceFont, dateString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
